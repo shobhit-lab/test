@@ -1,0 +1,1569 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Rangoli ERP</title>
+    <style>
+:root {
+  --bg: #f6f3f0;
+  --cd: #fff;
+  --tx: #231f20;
+  --mu: #7a7270;
+  --bd: #e6dfda;
+  --pr: #b3195f;
+  --pt: #fff;
+  --ok: #237a3b;
+  --bad: #c92a2a;
+  --sb: #2b1d2e;
+  --warn: #b26a00;
+  --wt: #fff;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17131a;
+    --cd: #211b25;
+    --tx: #eee8f0;
+    --mu: #a89fad;
+    --bd: #362d3b;
+    --pr: #ff6fae;
+    --pt: #2a0e1c;
+    --ok: #5fd07c;
+    --bad: #ff7b7b;
+    --sb: #0f0c11;
+    --warn: #ffb454;
+    --wt: #2a1a00;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17131a;
+  --cd: #211b25;
+  --tx: #eee8f0;
+  --mu: #a89fad;
+  --bd: #362d3b;
+  --pr: #ff6fae;
+  --pt: #2a0e1c;
+  --ok: #5fd07c;
+  --bad: #ff7b7b;
+  --sb: #0f0c11;
+  --warn: #ffb454;
+  --wt: #2a1a00;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--tx);
+  font: 14px/1.45 "Segoe UI", "Noto Sans Devanagari", system-ui, sans-serif;
+  transition: background .3s, color .3s;
+}
+#app {
+  display: flex;
+  height: 100%;
+}
+nav {
+  width: 200px;
+  background: var(--sb);
+  color: #e9dfe9;
+  padding: 12px 8px;
+  overflow: auto;
+  flex: none;
+}
+nav h1 {
+  font: 700 17px Georgia, serif;
+  margin: 4px 8px 14px;
+  color: #ffb3d3;
+}
+nav a {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #cfc3cf;
+}
+nav a.on,
+nav a:hover {
+  background: #4a2d4d;
+  color: #fff;
+}
+main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 16px;
+  background: var(--cd);
+  border-bottom: 1px solid var(--bd);
+}
+header input {
+  flex: 1;
+  max-width: 340px;
+}
+#bc {
+  color: var(--mu);
+  font-size: 12px;
+  padding: 8px 16px 0;
+}
+#v {
+  padding: 12px 16px 40px;
+  overflow: auto;
+  flex: 1;
+}
+input,
+select,
+button {
+  font: inherit;
+  color: var(--tx);
+  background: var(--cd);
+  border: 1px solid var(--bd);
+  border-radius: 6px;
+  padding: 7px 10px;
+}
+button {
+  cursor: pointer;
+}
+button.p {
+  background: var(--pr);
+  color: var(--pt);
+  border-color: var(--pr);
+  font-weight: 600;
+}
+button.x {
+  color: var(--bad);
+}
+:focus-visible {
+  outline: 2px solid var(--pr);
+  outline-offset: 1px;
+}
+.g {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.c {
+  background: var(--cd);
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  padding: 12px;
+  overflow-x: auto;
+}
+.seg {
+  display: flex;
+  margin-top: 8px;
+  padding: 2px;
+  border: 1px solid var(--bd);
+  border-radius: 999px;
+  gap: 2px;
+}
+.seg button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  color: var(--mu);
+  cursor: pointer;
+}
+.seg button.on {
+  background: #ff5fa2;
+  color: #1b1a1f;
+  font-weight: 600;
+}
+.k b {
+  display: block;
+  font-size: 20px;
+  margin-top: 2px;
+}
+.k details {
+  margin-top: 8px;
+  font-size: 12px;
+}
+.kd > span {
+  font-size: 16px;
+  color: var(--tx, inherit);
+  font-weight: 600;
+}
+.kd details {
+  font-size: 15px;
+}
+.kd details div b {
+  display: inline;
+  font-size: 15px;
+  margin: 0;
+}
+.kd details div span {
+  font-size: 14px;
+}
+.k summary {
+  cursor: pointer;
+  color: var(--mu);
+}
+.k details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  border-top: 1px solid var(--bd);
+}
+.k span,
+.mu {
+  color: var(--mu);
+  font-size: 12px;
+}
+.bad {
+  color: var(--bad);
+}
+.ok {
+  color: var(--ok);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  text-align: left;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--bd);
+  white-space: nowrap;
+}
+th {
+  color: var(--mu);
+  font-weight: 600;
+  font-size: 12px;
+}
+tr.low {
+  background: color-mix(in srgb, var(--warn) 12%, transparent);
+}
+tr.out {
+  background: color-mix(in srgb, var(--bad) 14%, transparent);
+}
+.wb {
+  background: var(--warn);
+  color: var(--wt);
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 11px;
+}
+.lgn {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: #f3f3f4 url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%201600%20900%22%20preserveAspectRatio=%22xMidYMid%20slice%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id=%22a%22%20x1=%220%22%20y1=%220%22%20x2=%221%22%20y2=%221%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%23ffffff%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%23ededee%22/%3E%3C/linearGradient%3E%0A%3ClinearGradient%20id=%22b%22%20x1=%220%22%20y1=%221%22%20x2=%221%22%20y2=%220%22%3E%3Cstop%20offset=%220%22%20stop-color=%22%23f6f6f7%22/%3E%3Cstop%20offset=%221%22%20stop-color=%22%23ffffff%22/%3E%3C/linearGradient%3E%0A%3Cfilter%20id=%22f%22%3E%3CfeGaussianBlur%20stdDeviation=%226%22/%3E%3C/filter%3E%0A%3C/defs%3E%0A%3Crect%20width=%221600%22%20height=%22900%22%20fill=%22%23f3f3f4%22/%3E%0A%3Cpolygon%20points=%220,80%20760,360%20760,520%200,300%22%20fill=%22url%28%23a%29%22/%3E%0A%3Cpolygon%20points=%220,80%20760,360%20760,380%200,110%22%20fill=%22%23dcdcde%22%20opacity=%22.6%22%20filter=%22url%28%23f%29%22/%3E%0A%3Cpolygon%20points=%22520,0%201220,0%201020,300%20700,120%22%20fill=%22url%28%23b%29%22/%3E%0A%3Cpolygon%20points=%221020,300%201220,0%201330,0%201600,0%201600,120%201160,330%22%20fill=%22%23ffffff%22%20opacity=%22.85%22/%3E%0A%3Cpolygon%20points=%22700,120%201020,300%201160,330%20900,440%20600,300%22%20fill=%22%23e7e7e8%22%20opacity=%22.7%22%20filter=%22url%28%23f%29%22/%3E%0A%3Cpolygon%20points=%220,560%20900,760%201180,900%200,900%22%20fill=%22url%28%23a%29%22/%3E%0A%3Cpolygon%20points=%220,560%20900,760%20900,790%200,600%22%20fill=%22%23d9d9db%22%20opacity=%22.55%22%20filter=%22url%28%23f%29%22/%3E%0A%3Cpolygon%20points=%221000,430%201600,380%201600,520%201060,560%22%20fill=%22%23ffffff%22%20opacity=%22.9%22/%3E%0A%3Cpolygon%20points=%221100,700%201600,640%201600,760%201160,820%22%20fill=%22%23ffffff%22%20opacity=%22.8%22/%3E%0A%3C/svg%3E") center / cover no-repeat;
+}
+.lgc {
+  width: min(400px, 100%);
+  background: #fff;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .06);
+}
+.lgc h1 {
+  text-align: center;
+  font-size: 20px;
+  margin: 0 0 24px;
+  color: #111827;
+}
+.lgc label {
+  display: block;
+  font-size: 14px;
+  margin: 14px 0 0;
+  color: #1f2937;
+}
+.lgc input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+  padding: 11px 12px;
+  font-size: 14px;
+  background: #fff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+.lgc input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+}
+.lpw {
+  position: relative;
+  display: block;
+}
+.lpw input {
+  padding-right: 40px;
+}
+.lpw button {
+  position: absolute;
+  right: 4px;
+  top: 6px;
+  height: 40px;
+  padding: 0 8px;
+  background: none;
+  border: 0;
+  color: #6b7280;
+  cursor: pointer;
+}
+.lerr {
+  display: block;
+  min-height: 18px;
+  margin-top: 8px;
+  color: #dc2626;
+  font-size: 13px;
+}
+.lgc .lbt {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #2563eb;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.lgc .lbt:hover {
+  background: #1d4ed8;
+}
+.md.wd {
+  width: min(900px, 100%);
+}
+.bd {
+  background: var(--bad);
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 11px;
+}
+.tb {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.tb h2 {
+  margin: 0;
+  flex: 1;
+  font: 600 18px Georgia, serif;
+}
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0;
+  font-size: 12px;
+}
+.bar i {
+  display: block;
+  height: 10px;
+  background: var(--pr);
+  border-radius: 3px;
+}
+.bar em {
+  width: 90px;
+  font-style: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#m .mb {
+  position: fixed;
+  inset: 0;
+  background: #0008;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+  padding: 10px;
+}
+.md {
+  background: var(--cd);
+  border-radius: 10px;
+  padding: 16px;
+  width: min(560px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+}
+.md label {
+  display: block;
+  margin: 8px 0;
+  font-size: 12px;
+  color: var(--mu);
+}
+.md label input,
+.md label select {
+  width: 100%;
+  margin-top: 3px;
+  color: var(--tx);
+}
+.ac {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+#t {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 20;
+}
+#t div {
+  background: var(--sb);
+  color: #fff;
+  padding: 9px 14px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+.es {
+  text-align: center;
+  color: var(--mu);
+  padding: 28px;
+}
+@media (max-width: 760px) {
+  nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    display: flex;
+    z-index: 5;
+    padding: 4px;
+    overflow-x: auto;
+  }
+  nav h1 {
+    display: none;
+  }
+  nav a {
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+  #v {
+    padding-bottom: 70px;
+  }
+}
+
+</style>
+  </head>
+  <body>
+    <div id="app">
+      <nav id="nv"></nav>
+      <main>
+        <header>
+          <input id="q" type="search">
+          <select id="lg">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+          <button id="th"></button>
+        </header>
+        <div id="bc"></div>
+        <div id="v"></div>
+      </main>
+    </div>
+    <div id="m"></div>
+    <div id="t"></div>
+    <script>
+const HI = {
+  Dashboard: 'डैशबोर्ड',
+  Products: 'उत्पाद',
+  Stock: 'स्टॉक',
+  Search: 'खोजें',
+  'Total Products': 'कुल उत्पाद',
+  'Total Categories': 'कुल श्रेणियां',
+  'Low Stock Items': 'कम स्टॉक',
+  'Inventory Value': 'इन्वेंटरी मूल्य',
+  'Recent Stock Entries': 'हाल की स्टॉक एंट्री',
+  'Inventory Movement': 'स्टॉक गतिविधि',
+    'Quick Actions': 'त्वरित कार्य',
+  'Add Product': 'उत्पाद जोड़ें',
+  'Add Goods': 'तैयार माल जोड़ें',
+  'Add Raw Material': 'कच्चा माल जोड़ें',
+  Goods: 'तैयार माल',
+  'Raw Materials': 'कच्चा माल',
+  'Kg per Bag': 'किलो प्रति बैग',
+  'Stock (Kg)': 'स्टॉक (किलो)',
+  'Stock Entry': 'स्टॉक एंट्री',
+  Name: 'नाम',
+  SKU: 'एसकेयू',
+  Category: 'श्रेणी',
+  Unit: 'इकाई',
+  'Selling Price': 'बिक्री मूल्य',
+  'Unit Price': 'इकाई मूल्य',
+  'Minimum Stock': 'न्यूनतम स्टॉक',
+  'Opening Stock': 'प्रारंभिक स्टॉक',
+  Status: 'स्थिति',
+  Low: 'कम',
+  OK: 'ठीक',
+  Actions: 'कार्य',
+  Edit: 'बदलें',
+  Delete: 'हटाएं',
+  Archive: 'संग्रहित करें',
+  Unarchive: 'संग्रह से हटाएं',
+  'Archive this item?': 'इसे संग्रहित करें?',
+  'Unarchive this item?': 'इसे संग्रह से हटाएं?',
+  Restock: 'पुनः स्टॉक',
+  Save: 'सहेजें',
+  Date: 'दिनांक',
+  Time: 'समय',
+  Type: 'प्रकार',
+  Reason: 'कारण',
+  Quantity: 'मात्रा',
+  Batch: 'बैच',
+  Remarks: 'टिप्पणी',
+  Batch: 'बैच',
+  'Day Shift': 'दिन शिफ्ट',
+  'Night Shift': 'रात शिफ्ट',
+  'Batch In': 'बैच इन',
+  'Raw Material Used': 'कच्चा माल उपयोग',
+  'Total Batch': 'कुल बैच',
+  'Balance Left': 'शेष',
+  'Batch Summary (Today)': 'बैच सारांश (आज)',
+  'All Batches': 'सभी बैच',
+  'View entries': 'एंट्री देखें',
+  'To Reorder': 'दोबारा मंगाना है',
+  'Short By': 'कमी',
+  'All Categories': 'सभी श्रेणियाँ',
+  'All Status': 'सभी स्थिति',
+  'All Types': 'सभी प्रकार',
+  'No entries': 'कोई एंट्री नहीं',
+  Damage: 'खराब',
+  Manufacturing: 'उत्पादन उपयोग',
+  Returned: 'वापसी',
+  Adjustment: 'समायोजन',
+  'Nothing here yet': 'अभी कुछ नहीं',
+  'Required field': 'आवश्यक फ़ील्ड',
+  'Invalid number': 'अमान्य संख्या',
+  'Product Added': 'उत्पाद जुड़ा',
+  'Product Updated': 'उत्पाद अपडेट',
+  'Stock Added': 'स्टॉक जुड़ा',
+  'Stock Removed': 'स्टॉक घटा',
+  'Language Changed': 'भाषा बदली',
+  'Theme Changed': 'थीम बदली',
+  'Insufficient stock': 'स्टॉक अपर्याप्त',
+  'Delete this item?': 'यह हटाएं?',
+  Saved: 'सहेजा',
+  Light: 'लाइट',
+  Dark: 'डार्क',
+  Close: 'बंद',
+  Previous: 'पिछला',
+  Next: 'अगला',
+  Archived: 'संग्रहित',
+  Add: 'जोड़ें',
+  Company: 'कंपनी',
+  'Closing Stock': 'क्लोजिंग स्टॉक',
+  'Stock Summary (Today)': 'स्टॉक सारांश (आज)',
+  Users: 'उपयोगकर्ता',
+  Username: 'यूज़रनेम',
+  Password: 'पासवर्ड',
+  Login: 'लॉगिन',
+  Logout: 'लॉगआउट',
+  'Sign In': 'साइन इन',
+  'Invalid username or password': 'अमान्य यूज़रनेम या पासवर्ड',
+  Staff: 'स्टाफ',
+  Admin: 'एडमिन',
+  Role: 'भूमिका',
+  'Change Password': 'पासवर्ड बदलें',
+  'New Password': 'नया पासवर्ड',
+  'Password Changed': 'पासवर्ड बदल दिया गया',
+  'Admin only': 'केवल एडमिन',
+  'You cannot delete your own account': 'आप अपना खाता हटा नहीं सकते',
+  'At least one admin is required': 'कम से कम एक एडमिन आवश्यक है',
+  'Create Admin': 'एडमिन बनाएं',
+  'Adjust Stock': 'स्टॉक समायोजन',
+  Direction: 'दिशा',
+  Remove: 'घटाएं',
+  'Opening count': 'प्रारंभिक गिनती',
+  Correction: 'सुधार',
+  Return: 'वापसी',
+  Reverse: 'उलटें',
+  Reversal: 'उलटा',
+  'Reversal of': 'उलटा:',
+  Reversed: 'उलटा गया',
+  'Stock Adjusted': 'स्टॉक समायोजित',
+  'Movement Reversed': 'एंट्री उलटी गई',
+  Backup: 'बैकअप',
+  'Export JSON': 'JSON एक्सपोर्ट',
+  'Import JSON': 'JSON इम्पोर्ट',
+  'Last export': 'अंतिम एक्सपोर्ट',
+  Never: 'कभी नहीं',
+  'Import replaces all current data.': 'इम्पोर्ट सभी मौजूदा डेटा बदल देता है।',
+  Exported: 'एक्सपोर्ट हुआ',
+  Imported: 'इम्पोर्ट हुआ',
+  Out: 'खत्म',
+  'Out of Stock': 'स्टॉक खत्म',
+  'Stock Value': 'स्टॉक मूल्य',
+  'without price': 'बिना खरीद मूल्य',
+  History: 'इतिहास',
+  Balance: 'शेष',
+  From: 'से',
+  To: 'तक',
+  Today: 'आज',
+  'Last 7 days': 'पिछले 7 दिन',
+  'Last 30 days': 'पिछले 30 दिन',
+  Clear: 'साफ़ करें',
+  'Batch Summary': 'बैच सारांश',
+  'Stock Summary': 'स्टॉक सारांश',
+  'Purchase Received': 'खरीद प्राप्त',
+  'Used in Production': 'उत्पादन में उपयोग',
+  'No batch products': 'कोई बैच उत्पाद नहीं',
+  'Use Adjust Stock for this category': 'इस श्रेणी के लिए स्टॉक समायोजन उपयोग करें',
+  'Rangoli ERP': 'रंगोली ईआरपी',
+  'Raw Material': 'कच्चा माल',
+  'Finished Product': 'तैयार उत्पाद',
+  Kg: 'किलो',
+  Bag: 'बैग',
+  Confirm: 'पुष्टि करें',
+  Optional: 'वैकल्पिक',
+  'Good Name': 'तैयार माल का नाम',
+  Deleted: 'हटाया गया',
+  Unarchived: 'संग्रह से हटाया गया',
+  Error: 'त्रुटि',
+  'Show password': 'पासवर्ड दिखाएं',
+  'Add only': 'केवल जोड़ें',
+  'Remove only': 'केवल घटाएं',
+  'Low stock': 'कम स्टॉक',
+  'Add goods and raw materials first': 'पहले तैयार माल और कच्चा माल जोड़ें',
+  'Product has transactions. Use Archive instead.': 'इस उत्पाद की एंट्री मौजूद हैं। कृपया इसे संग्रहित करें।',
+  'Storage full or blocked: changes were NOT saved and were reverted.': 'स्टोरेज भरा है या बंद है: बदलाव सहेजे नहीं गए और वापस कर दिए गए।',
+  'Language': 'भाषा'
+};
+const S = {
+  g(k) {
+    try {
+      return localStorage.getItem(k);
+    } catch (e) {
+      return null;
+    }
+  },
+  s(k, v) {
+    try {
+      localStorage.setItem(k, v);
+      return 1;
+    } catch (e) {
+      return 0;
+    }
+  }
+};
+let lang = S.g('lg') || 'en',
+  view = 'dash',
+  page = 0,
+  db;
+const t = k => lang == 'hi' && HI[k] || k,
+  $ = s => document.querySelector(s),
+  e = s => String(s ?? '').replace(
+    /[&<>"']/g,
+    c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+  );
+const money = n => '₹' + (+n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 }),
+  pad = n => String(n).padStart(2, '0'),
+  ymd = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()),
+  uid = () => Math.random().toString(36).slice(2, 9);
+
+// Shifts: 1 = 09:00-17:00, 2 = 17:00-01:00 (next day).
+const SHIFTS = { 1: '9 AM - 5 PM', 2: '5 PM - 1 AM', 3: '1 AM - 9 AM' },
+  SHIFTS_HI = { 1: 'सुबह 9 - शाम 5', 2: 'शाम 5 - रात 1', 3: 'रात 1 - सुबह 9' },
+  shName = s => s ? t(s == '3' ? 'Raw Material Used' : s == '1' ? 'Day Shift' : 'Night Shift') + ' (' + (lang == 'hi' ? SHIFTS_HI : SHIFTS)[s] + ')' : '-',
+  curShift = () => {
+    const n = new Date(),
+      h = n.getHours() + n.getMinutes() / 60;
+    return h >= 9 && h < 17 ? '1' : h >= 17 || h < 1 ? '2' : '3';
+  },
+  // 00:00-09:00 belongs to the previous day's cycle (Shift 2 tail + Delivery)
+  shiftDate = () => {
+    const n = new Date();
+    if (n.getHours() < 9) n.setDate(n.getDate() - 1);
+    return ymd(n);
+  },
+  nowTime = () => pad(new Date().getHours()) + ':' + pad(new Date().getMinutes());
+
+function seed() {
+  const P = (name, sku, cat, unit, sp, pp, stock, min) => ({
+    id: uid(),
+    kpb: cat == 'Finished Product' ? (parseFloat((name.match(/([\d.]+)\s*kg/i) || [])[1]) || 1) : 0,
+    name,
+    sku,
+    cat,
+    unit,
+    sp,
+    pp,
+    stock,
+    min,
+    arch: 0,
+    res: 0
+  });
+  return {
+    units: ['Kg', 'Bag'],
+    cats: ['Raw Material', 'Finished Product'],
+    prods: [
+      P('Apple 16x24', 'APL-1624', 'Raw Material', 'Bag', 3, 2, 6200, 5000),
+      P('Anand 16x24', 'AND-1624', 'Raw Material', 'Bag', 3, 2, 4200, 5000),
+      P('Gulab Raja 16x22', 'GR-1622', 'Raw Material', 'Bag', 3, 2, 7000, 5000),
+      P('Rubine-W', 'RAW-RBW', 'Raw Material', 'Kg', 420, 350, 180, 150),
+      P('Yellow', 'RAW-YEL', 'Raw Material', 'Kg', 380, 310, 90, 150),
+      P('Green 7', 'RAW-GR7', 'Raw Material', 'Kg', 400, 330, 320, 300),
+      P('Rangoli 40 KG', 'FG-R40', 'Finished Product', 'Bag', 1800, 1400, 60, 20),
+      P('Apple 1 KG', 'FG-A1', 'Finished Product', 'Bag', 70, 50, 500, 200),
+      P('Oil', 'RAW-OIL', 'Raw Material', 'Bag', 9000, 8000, 14, 10)
+    ],
+    moves: []
+  };
+}
+
+try {
+  db = JSON.parse(S.g('rg') || 'null');
+} catch (x) {}
+db = db || seed();
+// Migrate legacy data: drop invoices, customers, suppliers, GST/HSN.
+const migrate = d => {
+  // Only two categories and two units exist: Raw Material / Finished Product, Kg / Bag.
+  const FIN = ['Finished Goods', 'Finished Product', 'Rangoli Colors', 'Decorative Items'];
+  d.cats = ['Raw Material', 'Finished Product'];
+  d.units = ['Kg', 'Bag'];
+  d.prods.forEach(p => {
+    p.cat = FIN.includes(p.cat) ? 'Finished Product' : 'Raw Material';
+    if (p.unit != 'Kg') p.unit = 'Bag';
+    if (p.cat == 'Finished Product' && !(p.kpb > 0)) p.kpb = parseFloat((String(p.name).match(/([\d.]+)\s*kg/i) || [])[1]) || 1;
+  });
+  delete d.inv;
+  delete d.cust;
+  delete d.sup;
+  d.prods.forEach(p => {
+    delete p.gst;
+    delete p.hsn;
+    delete p.sp;
+  });
+  d.moves.forEach(x => {
+    delete x.sid;
+    delete x.party;
+    if (x.type == 'buy' || x.type == 'use') {
+      x.reason = x.reason || (x.type == 'buy' ? 'Purchase Received' : 'Used in Production');
+      x.sign = x.type == 'buy' ? 1 : -1;
+      x.type = 'adj';
+    }
+  });
+  return d;
+};
+migrate(db);
+let snap = JSON.stringify(db);
+const save = () => {
+  const j = JSON.stringify(db);
+  if (S.s('rg', j)) snap = j;
+  else {
+    db = JSON.parse(snap);
+    toast('Storage full or blocked: changes were NOT saved and were reverted.');
+  }
+};
+
+function toast(m) {
+  const d = document.createElement('div');
+  d.textContent = t(m);
+  $('#t').append(d);
+  setTimeout(() => d.remove(), 2200);
+}
+
+const P = id => db.prods.find(p => p.id == id) || {},
+  // Out: nothing left. Low: 1..min. OK: above min.
+  lvl = p => p.stock <= 0 ? 'out' : p.stock <= p.min ? 'low' : 'ok',
+  isLow = p => lvl(p) != 'ok',
+  avail = p => p.stock - (p.res || 0);
+const NAV = [
+  ['dash', 'Dashboard'],
+  ['prod', 'Products'],
+  ['stock', 'Stock'],
+  ['usr', 'Users']
+];
+
+function modal(title, body, ok, wide) {
+  $('#m').innerHTML = `<div class=mb role=dialog aria-modal=true onclick="event.target==this&&cl()"><div class="md${wide?' wd':''}"><h3>${t(title)}</h3>${body}<div class=ac><button onclick=cl()>${t('Close')}</button>${ok?`<button class=p id=ok>${t('Save')}</button>`:''}</div></div></div>`;
+  if (ok)
+    $('#ok').onclick = () => {
+      ok() === false || cl();
+    };
+}
+
+const cl = () => $('#m').innerHTML = '';
+// In-page confirm/alert. Native confirm() and alert() are silently blocked in sandboxed frames.
+function ask(msg, yes) {
+  modal('Confirm', `<div>${e(msg)}</div>`, yes);
+  $('#ok').textContent = t('OK');
+}
+
+function form(title, fs, vals, cb) {
+  modal(
+    title,
+    fs.map(f => `<label>${t(f[1])}${f[2]=='sel'?`<select id=f_${f[0]}>${f[3].map(o=>`<option value="${e(o[0])}">${e(o[1])}</option>`).join('')}</select>`:`<input id=f_${f[0]} type=${f[2]||'text'} value="${e(vals[f[0]])}" ${f[2]=='number'?'min=0 step=any':''}>`}<small class=bad id=r_${f[0]}></small></label>`).join(''),
+    () => {
+      let o = {},
+        bad = 0;
+      fs.forEach(f => {
+        let v = $('#f_' + f[0]).value;
+        $('#r_' + f[0]).textContent = '';
+        if (f[4] && !v.trim()) {
+          $('#r_' + f[0]).textContent = t('Required field');
+          bad = 1;
+        }
+        if (f[2] == 'number') {
+          if (v !== '' && (isNaN(v) || v < 0)) {
+            $('#r_' + f[0]).textContent = t('Invalid number');
+            bad = 1;
+          }
+          v = +v || 0;
+        }
+        o[f[0]] = v;
+      });
+      if (bad) return false;
+      return cb(o);
+    }
+  );
+  fs.forEach(f => {
+    if (f[2] == 'sel' && vals[f[0]] != null) $('#f_' + f[0]).value = vals[f[0]];
+  });
+}
+
+const opt = a => a.map(x => [x, t(x)]),
+  popt = () => db.prods.filter(p => !p.arch).map(p => [p.id, p.name]);
+const FD = {
+  prod: () => [
+    ['name', 'Name', '', 0, 1],
+    ['sku', 'SKU'],
+    ['cat', 'Category', 'sel', opt(db.cats)],
+    ['unit', 'Unit', 'sel', opt(db.units)],
+    ['kpb', 'Kg per Bag', 'number'],
+    ['pp', 'Unit Price', 'number'],
+    ['stock', 'Quantity', 'number'],
+    ['min', 'Minimum Stock', 'number']
+  ]
+};
+
+function edit(id, cat) {
+  const o = db.prods.find(x => x.id == id) || {};
+  cat = o.cat || cat || 'Raw Material';
+  const fin = cat == 'Finished Product',
+    title = id ? 'Edit' : fin ? 'Add Goods' : 'Add Raw Material',
+    fs = FD.prod().filter(f => f[0] != 'cat' && !(id && f[0] == 'stock') && !(fin && f[0] == 'kpb') && !(!fin && f[0] == 'kpb'));
+  form(title, fs, o, v => {
+    v.cat = cat;
+    if (!fin) v.kpb = 0;
+    else v.kpb = o.kpb > 0 ? o.kpb : 1;
+    if (id) {
+      delete v.stock;
+      Object.assign(o, v);
+    } else db.prods.push({ id: uid(), arch: 0, res: 0, ...v });
+    save();
+    toast(id ? 'Product Updated' : 'Product Added');
+    go(view);
+  });
+}
+
+function del(id) {
+  if (db.moves.some(m => m.pid == id)) {
+    toast('Product has transactions. Use Archive instead.');
+    return;
+  }
+  ask(t('Delete this item?'), () => {
+    db.prods = db.prods.filter(x => x.id != id);
+    save();
+    toast('Deleted');
+    go(view);
+  });
+}
+
+function arch(id) {
+  const p = P(id);
+  if (!p.id) return;
+  ask(t(p.arch ? 'Unarchive this item?' : 'Archive this item?'), () => {
+    p.arch = p.arch ? 0 : 1;
+    save();
+    toast(p.arch ? 'Archived' : 'Unarchived');
+    go(view);
+  });
+}
+
+const TL = { in: 'Batch In', out: 'Raw Material Used', adj: 'Adjustment', rev: 'Reversal' },
+  tl = ty => t(TL[ty] || ty);
+// Stock effect of one movement. adj/rev carry an explicit sign (+1/-1).
+const eff = m => m.type == 'in' ? m.qty : m.type == 'out' ? -m.qty : m.type == 'adj' || m.type == 'rev' ? m.sign * m.qty : 0,
+  qtyTxt = m => m.type == 'adj' || m.type == 'rev' ? (m.sign > 0 ? '+' : '\u2212') + m.qty : m.qty,
+  revSet = () => new Set(db.moves.filter(m => m.refId).map(m => m.refId)),
+  REVERSIBLE = ['in', 'out', 'adj'],
+  ADJ_REASONS = ['Opening count', 'Correction', 'Damage', 'Return', 'Purchase Received', 'Used in Production'],
+  // Reasons that imply a direction. Reasons absent here (Correction, Return) allow either.
+  REASON_DIR = { 'Opening count': 1, 'Purchase Received': 1, 'Damage': -1, 'Used in Production': -1 };
+
+function adjForm(pid, dir, reason) {
+  form(
+    'Adjust Stock',
+    [
+      ['pid', 'Name', 'sel', popt()],
+      ['dir', 'Direction', 'sel', [['1', t('Add')], ['-1', t('Remove')]]],
+      ['qty', 'Quantity', 'number', '', 1],
+      ['reason', 'Reason', 'sel', [['', '-'], ...ADJ_REASONS.map(r => [r, t(r)])], 1],
+      ['rem', 'Remarks']
+    ],
+    { pid, dir: dir || '1', reason: reason || '' },
+    o => {
+      const p = P(o.pid),
+        sg = +o.dir;
+      if (!p.id) return false;
+      if (!(o.qty > 0)) {
+        toast('Invalid number');
+        return false;
+      }
+      if (REASON_DIR[o.reason] && REASON_DIR[o.reason] !== sg) {
+        toast(t(o.reason) + ': ' + t(REASON_DIR[o.reason] > 0 ? 'Add only' : 'Remove only'));
+        return false;
+      }
+      if (sg < 0 && o.qty > p.stock) {
+        toast('Insufficient stock');
+        return false;
+      }
+      p.stock += sg * o.qty;
+      db.moves.push({ id: uid(), d: shiftDate(), tm: nowTime(), pid: o.pid, type: 'adj', sign: sg, qty: o.qty, reason: o.reason, sh: '', rem: o.rem });
+      save();
+      toast('Stock Adjusted');
+      go(view);
+    }
+  );
+  // Raw Material / Goods slider: filters the Name list.
+  const sel = $('#f_pid'),
+    TABS = [['Raw Material', 'Raw Material'], ['Finished Product', 'Goods']],
+    cur = P(pid);
+  let tab = cur.id && cur.cat == 'Finished Product' ? 'Finished Product' : 'Raw Material';
+  const fill = keep => {
+      const ps = db.prods.filter(p => !p.arch && (p.cat == 'Finished Product') == (tab == 'Finished Product'));
+      sel.innerHTML = ps.map(p => `<option value="${e(p.id)}">${e(p.name)}</option>`).join('');
+      if (keep && ps.some(p => p.id == keep)) sel.value = keep;
+    },
+    sg = document.createElement('div');
+  sg.className = 'seg';
+  sg.style.marginBottom = '10px';
+  sg.innerHTML = TABS.map(x => `<button type=button data-c="${e(x[0])}" class="${x[0] == tab ? 'on' : ''}">${t(x[1])}</button>`).join('');
+  sg.onclick = ev => {
+    const b = ev.target.closest('button');
+    if (!b) return;
+    tab = b.dataset.c;
+    sg.querySelectorAll('button').forEach(x => x.classList.toggle('on', x == b));
+    fill();
+  };
+  fill(pid);
+  sel.parentElement.before(sg);
+}
+
+// Reversal never deletes or edits the original; it appends an opposite entry with refId -> original.
+function revMove(id) {
+  const m = db.moves.find(x => x.id == id),
+    p = m ? P(m.pid) : {};
+  if (!m || !p.id || m.refId || !REVERSIBLE.includes(m.type) || revSet().has(m.id)) return;
+  const d = eff(m);
+  if (p.stock - d < 0) {
+    toast('Insufficient stock');
+    return;
+  }
+  modal(
+    'Reverse',
+    `<div>${e(p.name)} \u00b7 ${tl(m.type)} \u00b7 ${qtyTxt(m)} \u00b7 ${e(m.d)} ${e(m.tm || '')}</div><label>${t('Remarks')}<input id=f_rem></label>`,
+    () => {
+      p.stock -= d;
+      db.moves.push({ id: uid(), d: shiftDate(), tm: nowTime(), pid: m.pid, type: 'rev', sign: d > 0 ? -1 : 1, qty: m.qty, reason: 'Reversal', refId: m.id, sh: '', rem: $('#f_rem').value });
+      save();
+      toast('Movement Reversed');
+      go(view);
+    }
+  );
+}
+
+// Batch In/Out is for made/sold goods. Raw materials and packaging go through Adjust Stock.
+const BATCH_CATS = ['Finished Product'],
+  isBatch = p => BATCH_CATS.includes(p.cat),
+  batchOpt = () => popt();
+
+function stockForm(pid, mode) {
+  mode = mode || 'in';
+  // Same product list as the Products page; default the selection to a finished-goods item.
+  pid = pid || (db.prods.find(p => !p.arch && !isBatch(p)) || db.prods.find(p => !p.arch) || {}).id;
+  const plus = mode == 'in',
+    cs = curShift();
+  form(
+    TL[mode],
+    [
+      ['pid', 'Name', 'sel', batchOpt()],
+      ...(mode == 'in' ? [['sh', 'Batch', 'sel', [['1', shName('1')], ['2', shName('2')]]]] : []),
+      ['qty', 'Quantity', 'number', '', 1],
+      ['rem', 'Remarks']
+    ],
+    { pid, sh: cs == '2' ? '2' : '1' },
+    o => {
+      const p = P(o.pid);
+      if (!p.id) return false;
+      if (!(o.qty > 0)) {
+        toast('Invalid number');
+        return false;
+      }
+      if (!plus && o.qty > avail(p)) {
+        toast('Insufficient stock');
+        return false;
+      }
+      o.type = mode;
+      o.reason = mode == 'in' ? 'Manufacturing' : TL[mode];
+      o.sh = mode == 'in' ? o.sh : mode == 'out' ? '3' : '';
+      p.stock += plus ? o.qty : -o.qty;
+      db.moves.push({ id: uid(), d: shiftDate(), tm: nowTime(), ...o });
+      save();
+      toast(plus ? 'Stock Added' : 'Stock Removed');
+      go(view);
+    }
+  );
+  // Raw Material / Finished Product slider: filters the Name list.
+  const sel = $('#f_pid'),
+    TABS = [['Raw Material', 'Raw Material'], ['Finished Product', 'Finished Product']],
+    cur = P(pid);
+  let tab = cur.id && cur.cat == 'Finished Product' ? 'Finished Product' : 'Raw Material';
+  const fill = keep => {
+      const ps = db.prods.filter(p => !p.arch && (p.cat == 'Finished Product') == (tab == 'Finished Product'));
+      sel.innerHTML = ps.map(p => `<option value="${e(p.id)}">${e(p.name)}</option>`).join('');
+      if (keep && ps.some(p => p.id == keep)) sel.value = keep;
+    },
+    sg = document.createElement('div');
+  sg.className = 'seg';
+  sg.style.marginBottom = '10px';
+  sg.innerHTML = TABS.map(x => `<button type=button data-c="${e(x[0])}" class="${x[0] == tab ? 'on' : ''}">${t(x[1])}</button>`).join('');
+  sg.onclick = ev => {
+    const b = ev.target.closest('button');
+    if (!b) return;
+    tab = b.dataset.c;
+    sg.querySelectorAll('button').forEach(x => x.classList.toggle('on', x == b));
+    fill();
+  };
+  fill(pid);
+  sel.parentElement.before(sg);
+}
+
+// ---- Raw Material Used (dashboard): pick the Good made, then add/remove raw material rows (qty + unit) ----
+function rmRow() {
+  const rs = db.prods.filter(p => !p.arch && p.cat != 'Finished Product');
+  return `<div class=rmr style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><select class=rm_p style="flex:2" onchange="rmUnit(this)">${rs.map(p => `<option value="${e(p.id)}">${e(p.name)}</option>`).join('')}</select><input class=rm_q type=number min=0 step=any placeholder="${e(t('Quantity'))}" style="flex:1;min-width:0"><span class=rm_u style="min-width:34px">${e(t((rs[0] || {}).unit || ''))}</span><button type=button onclick="rmDel(this)">${t('Remove')}</button></div>`;
+}
+function rmUnit(s) { s.parentElement.querySelector('.rm_u').textContent = t(P(s.value).unit || ''); }
+function rmAdd() { $('#rm_rows').insertAdjacentHTML('beforeend', rmRow()); }
+function rmDel(b) {
+  const r = b.closest('.rmr');
+  if ($('#rm_rows').children.length > 1) r.remove();
+  else { r.querySelector('.rm_q').value = ''; }
+}
+function rmForm() {
+  const goods = db.prods.filter(p => !p.arch && p.cat == 'Finished Product');
+  if (!goods.length || !db.prods.some(p => !p.arch && p.cat != 'Finished Product')) {
+    toast('Add goods and raw materials first');
+    return;
+  }
+  modal(
+    'Raw Material Used',
+    `<label>${t('Good Name')}<select id=rm_g>${goods.map(p => `<option value="${e(p.id)}">${e(p.name)}</option>`).join('')}</select></label><div style="margin:8px 0 4px"><b>${t('Raw Materials')}</b></div><div id=rm_rows>${rmRow()}</div><div class=tb style="margin:4px 0 8px"><button type=button class=p onclick="rmAdd()">${t('Add')}</button></div><label>${t('Remarks')} <span class=mu>(${t('Optional')})</span><input id=rm_rem></label><small class=bad id=rm_err></small>`,
+    () => {
+      const err = m => { $('#rm_err').textContent = m; return false; },
+        rows = [...document.querySelectorAll('#rm_rows .rmr')].map(r => ({ pid: r.querySelector('.rm_p').value, qty: +r.querySelector('.rm_q').value, raw: r.querySelector('.rm_q').value })).filter(r => r.raw !== '');
+      if (!rows.length) return err(t('Required field'));
+      if (rows.some(r => !(r.qty > 0))) return err(t('Invalid number'));
+      const tot = {};
+      rows.forEach(r => tot[r.pid] = (tot[r.pid] || 0) + r.qty);
+      for (const id in tot) if (tot[id] > avail(P(id))) return err(P(id).name + ': ' + t('Insufficient stock'));
+      const g = $('#rm_g').value, rem = $('#rm_rem').value;
+      rows.forEach(r => {
+        P(r.pid).stock -= r.qty;
+        db.moves.push({ id: uid(), d: shiftDate(), tm: nowTime(), pid: r.pid, gid: g, qty: r.qty, type: 'out', reason: TL.out, sh: '3', rem });
+      });
+      save();
+      toast('Stock Removed');
+      go(view);
+    },
+    1
+  );
+}
+
+const RG = { f: '', to: '' },
+  inR = d => (!RG.f || d >= RG.f) && (!RG.to || d <= RG.to),
+  plain = h => String(h).replace(/<[^>]*>/g, ' ').replace(/&(amp|lt|gt|quot|#39);/g, (m, c) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" }[c])),
+  // Search matches the text the user sees in the cells (last `skip` cells, e.g. Actions, are ignored).
+  srch = (rows, skip = 0) => {
+    const q = $('#q').value.toLowerCase().split(/\s+/).filter(Boolean);
+    return q.length ? rows.filter(r => {
+      const c = Array.isArray(r) ? r : r.c,
+        x = c.slice(0, c.length - skip).map(plain).join(' ').toLowerCase();
+      return q.every(w => x.includes(w));
+    }) : rows;
+  },
+  setRg = (f, to) => {
+    if (f && to && f > to) [f, to] = [to, f];
+    RG.f = f;
+    RG.to = to;
+    page = 0;
+    go(view);
+  },
+  rangeBar = () => {
+    const b = new Date(shiftDate() + 'T00:00:00'),
+      td = ymd(b),
+      ago = n => {
+        const d = new Date(b);
+        d.setDate(d.getDate() - n);
+        return ymd(d);
+      };
+    return `<div class=tb><span class=mu>${t('From')}</span><input type=date value="${e(RG.f)}" onchange="setRg(this.value,RG.to)"><span class=mu>${t('To')}</span><input type=date value="${e(RG.to)}" onchange="setRg(RG.f,this.value)">${btn(`setRg('${td}','${td}')`, 'Today')}${btn(`setRg('${ago(6)}','${td}')`, 'Last 7 days')}${btn(`setRg('${ago(29)}','${td}')`, 'Last 30 days')}${btn(`setRg('','')`, 'Clear')}</div>`;
+  },
+  kp = (l, v, c, sub) => `<div class="c k"><span>${t(l)}</span><b class=${c || ''}>${v}</b>${sub ? `<span>${sub}</span>` : ''}</div>`,
+  invStats = () => {
+    const ps = db.prods.filter(p => !p.arch);
+    return {
+      ps,
+      low: ps.filter(p => lvl(p) == 'low'),
+      out: ps.filter(p => lvl(p) == 'out'),
+      nop: ps.filter(p => !p.pp).length,
+      sv: ps.reduce((n, p) => n + p.stock * (+p.pp || 0), 0)
+    };
+  },
+  remTxt = x => {
+    const o = x.refId != null ? db.moves.find(m => m.id == x.refId) || {} : null;
+    return (o ? `${t('Reversal of')} ${e(o.d)} ${e(o.tm || '')}${x.rem ? ' \u00b7 ' : ''}` : '') + e(x.rem);
+  };
+
+// Per-product movement history with running balance (respects the active date range).
+function hist(id) {
+  const p = P(id),
+    rs = revSet();
+  let bal = p.stock;
+  const rows = db.moves.filter(m => m.pid == id).reverse().map(m => {
+    const a = bal;
+    bal -= eff(m);
+    return [m, a];
+  }).filter(r => inR(r[0].d));
+  modal(
+    'History',
+    `<p class=mu><b>${e(p.name)}</b> \u00b7 ${t('Stock')}: ${p.stock} ${e(t(p.unit))}${RG.f || RG.to ? ` \u00b7 ${e(RG.f || '\u2026')} \u2013 ${e(RG.to || '\u2026')}` : ''}</p>` +
+      (rows.length ? `<div style="overflow-x:auto"><table><tr>${['Date', 'Time', 'Batch', 'Type', 'Reason', 'Quantity', 'Balance', 'Remarks'].map(h => `<th>${t(h)}</th>`).join('')}</tr>${rows.map(([m, a]) => `<tr><td>${e(m.d)}</td><td>${e(m.tm || '-')}</td><td>${e(shName(m.sh))}</td><td>${tl(m.type)}</td><td>${t(m.reason || '')}</td><td>${qtyTxt(m)}</td><td>${a}</td><td>${remTxt(m)}${rs.has(m.id) ? ` <span class=mu>(${t('Reversed')})</span>` : ''}</td></tr>`).join('')}</table></div>` : `<div class=es>${t('Nothing here yet')}</div>`),
+    0,
+    1
+  );
+}
+
+// rows: arrays of cell HTML, or {c: cells, k: row class}
+function tbl(h, rows, np) {
+  if (!rows.length) return `<div class=es>${t('Nothing here yet')}</div>`;
+  if (np) return `<div class=c style="overflow-x:auto"><table style="table-layout:fixed;min-width:1350px"><colgroup>${[170,120,70,90,120,110,130,80,460].map(w=>`<col style="width:${w}px">`).join('')}</colgroup><tr>${h.map(x=>`<th>${t(x)}</th>`).join('')}</tr>${rows.map(r=>`<tr ${r.k?'class='+r.k:''}>${(Array.isArray(r)?r:r.c).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+  const n = Math.ceil(rows.length / 20);
+  page = Math.min(page, n - 1);
+  return `<div class=c><table><tr>${h.map(x=>`<th>${t(x)}</th>`).join('')}</tr>${rows.slice(page*20,page*20+20).map(r=>`<tr ${r.k?'class='+r.k:''}>${(Array.isArray(r)?r:r.c).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table>${n>1?`<div class=tb style="margin:8px 0 0"><button onclick="page--;go(view)" ${page?'':'disabled'}>${t('Previous')}</button><span class=mu>${page+1}/${n}</span><button onclick="page++;go(view)" ${page<n-1?'':'disabled'}>${t('Next')}</button></div>`:''}</div>`;
+}
+
+// Sums quantities per unit so kg, bags and packets are never added together.
+const sumU = (a, ty) => {
+    const o = {};
+    a.forEach(x => {
+      if (ty && x.type != ty) return;
+      const u = P(x.pid).unit || '-';
+      o[u] = (o[u] || 0) + x.qty;
+    });
+    return o;
+  },
+  addU = (a, b, k = 1) => {
+    const o = { ...a };
+    Object.keys(b).forEach(u => (o[u] = (o[u] || 0) + k * b[u]));
+    return o;
+  },
+  fmtU = o => Object.keys(o).filter(u => o[u]).map(u => `${Math.round(o[u] * 100) / 100} ${e(t(u))}`).join(' \u00b7 ') || '0',
+  negU = o => Object.values(o).some(v => v < 0);
+const bars = it => {
+  const m = Math.max(1, ...it.map(x => x[1]));
+  return it.map(x => `<div class=bar><em>${e(x[0])}</em><i style="width:${x[1]/m*60}%"></i>${Math.round(x[1]).toLocaleString('en-IN')}</div>`).join('') ||
+    `<div class=mu>${t('Nothing here yet')}</div>`;
+};
+const mon = d => d.slice(0, 7);
+const kdRow = m => `<div><span>${e(P(m.pid).name)}${m.gid && P(m.gid).id ? ' \u2192 ' + e(P(m.gid).name) : ''}${m.sh == '1' || m.sh == '2' ? ' \u00b7 ' + t(m.sh == '1' ? 'Day Shift' : 'Night Shift') : ''}${m.tm ? ' (' + e(m.tm) + ')' : ''}</span><b>${m.qty} ${e(t(P(m.pid).unit || ''))}</b></div>`,
+  // Raw Material Used entries are grouped under the Good they were used for: Good name, then each raw material.
+  kdList = a => {
+    const gs = [], seen = {};
+    a.forEach(m => {
+      if (m.type == 'out' && m.gid && P(m.gid).id) {
+        const k = m.gid + '|' + m.d + '|' + (m.tm || '');
+        if (!seen[k]) gs.push(seen[k] = { g: m.gid, tm: m.tm, rows: [] });
+        seen[k].rows.push(m);
+      } else gs.push({ rows: [m] });
+    });
+    return gs.map(x => x.g
+      ? `<div style="margin-top:6px"><b>${e(P(x.g).name)}${x.tm ? ' (' + e(x.tm) + ')' : ''}</b></div>` + x.rows.map(m => `<div style="padding-left:12px"><span>${e(P(m.pid).name)}</span><b>${m.qty} ${e(t(P(m.pid).unit || ''))}</b></div>`).join('')
+      : kdRow(x.rows[0])).join('');
+  },
+  kd = (l, v, a, sub, c) => `<div class="c k kd"><span>${t(l)}</span><details><summary>${t(a.length ? 'View entries' : 'No entries')}${a.length ? ' (' + a.length + ')' : ''}</summary>${kdList(a)}</details></div>`;
+// Balance Left card with a dropdown: Goods, then Raw Material, each listing name and stock left.
+const balLeft = (ps, v, c) => {
+  const grp = (h, a) => `<div style="margin-top:6px"><b>${t(h)}:-</b></div>` + (a.length ? a.map(p => `<div style="padding-left:12px"><span>${e(p.name)}</span><b class=${lvl(p) == 'ok' ? '' : 'bad'}>${p.stock} ${e(t(p.unit || ''))}</b></div>`).join('') : `<div style="padding-left:12px"><span class=mu>${t('No entries')}</span></div>`);
+  return `<div class="c k kd"><span>${t('Balance Left')}</span><details><summary>${t('View entries')}</summary>${grp('Goods', ps.filter(p => p.cat == 'Finished Product'))}${grp('Raw Material', ps.filter(p => p.cat != 'Finished Product'))}</details></div>`;
+};
+
+const B = (h, n) => `<div class=tb><h2>${t(h)}</h2>${n||''}</div>`,
+  btn = (f, l, c) => `<button class="${c||''}" onclick="${f}">${t(l)}</button>`;
+const V = {
+  dash() {
+    const { ps, low, out, nop, sv } = invStats(),
+      any = RG.f || RG.to,
+      td = shiftDate(),
+      rf = any ? RG.f : td,
+      rt = any ? RG.to : td,
+      inr = d => (!rf || d >= rf) && (!rt || d <= rt),
+      lbl = any ? `${e(rf || '\u2026')} \u2013 ${e(rt || '\u2026')}` : td;
+    // Originals reversed (all-time / same-range) are excluded from in/out totals; the ledger still shows both rows.
+    const rs = revSet(),
+      mvl = db.moves.filter(x => !rs.has(x.id) && inr(x.d)),
+      mi = sumU(mvl, 'in'),
+      mo = sumU(mvl, 'out'),
+      mvBars = [].concat(
+        Object.keys(mi).map(u => [`${t('Batch In')} (${t(u)})`, mi[u]]),
+        Object.keys(mo).map(u => [`${t('Raw Material Used')} (${t(u)})`, mo[u]])
+      );
+    const cy = db.moves.filter(x => inr(x.d)),
+      ri = new Set(cy.filter(x => x.refId).map(x => x.refId)),
+      lv = cy.filter(x => !ri.has(x.id)),
+      sum = (a, ty) => a.filter(x => x.type == ty).reduce((s, x) => s + x.qty, 0),
+      e1 = lv.filter(x => x.sh == '1' && x.type == 'in'),
+      e2 = lv.filter(x => x.sh == '2' && x.type == 'in'),
+      eo = lv.filter(x => x.type == 'out'),
+      b1 = sumU(lv.filter(x => x.sh == '1'), 'in'),
+      b2 = sumU(lv.filter(x => x.sh == '2'), 'in'),
+      dl = sumU(lv, 'out'),
+      bal = addU(addU(b1, b2), dl, -1),
+      ss = ps.map(p => {
+        const m = cy.filter(x => x.pid == p.id),
+          l = lv.filter(x => x.pid == p.id),
+          i = sum(l, 'in'), o = sum(l, 'out'),
+          net = m.reduce((s, x) => s + eff(x), 0),
+          after = rt ? db.moves.filter(x => x.pid == p.id && x.d > rt).reduce((s, x) => s + eff(x), 0) : 0,
+          close = p.stock - after;
+        return [e(p.name), close - net, i, o, net - (i - o), close];
+      });
+    return `<div class=g><div class="c k"><span>${t('Total Products')}</span><b>${ps.filter(p=>p.cat==tpc).length}</b><div class=seg>${db.cats.map(c=>`<button class="${c==tpc?'on':''}" onclick="tpc='${c}';go('dash')">${t(c)}</button>`).join('')}</div></div>${kp('Low Stock Items',low.length,low.length?'bad':'')}${kp('Out of Stock',out.length,out.length?'bad':'')}${kp('Inventory Value',money(sv),'',nop?`${nop} ${t('without price')}`:'')}</div>
+<div class=c style="margin-bottom:10px"><b>${t('Quick Actions')}</b><div class=tb style="margin:8px 0 0">${btn("go('prod');edit(null,'Raw Material')",'Add Raw Material')}${btn('stockForm()','Batch In','p')}${btn('rmForm()','Raw Material Used','p')}</div></div>
+${rangeBar()}<h3>${t(any?'Batch Summary':'Batch Summary (Today)')} <span class=mu>${lbl}</span></h3><div class=g style="align-items:stretch">${kd('Day Shift',fmtU(b1),e1)}${kd('Night Shift',fmtU(b2),e2)}${kd('Total Batch',fmtU(addU(b1,b2)),[...e1,...e2])}${kd('Raw Material Used',fmtU(dl),eo)}${balLeft(ps,fmtU(bal),negU(bal)?'bad':'ok')}</div>
+<h3>${t(any?'Stock Summary':'Stock Summary (Today)')} <span class=mu>${lbl}</span></h3>${tbl(['Name','Opening Stock','Batch In','Raw Material Used','Adjustment','Closing Stock'],ss)}
+<h3>${t('Recent Stock Entries')}</h3>${tbl(['Date','Batch','Name','Type','Quantity'],db.moves.slice(-5).reverse().map(x=>[x.d,e(shName(x.sh)),e(P(x.pid).name),tl(x.type),qtyTxt(x)]))}`;
+  },
+  prod() {
+    const { low, out, nop, sv } = invStats(),
+      rk = p => p.arch ? 3 : { out: 0, low: 1, ok: 2 }[lvl(p)],
+      bdg = p => p.arch ? '-' : { out: `<span class=bd>${t('Out')}</span>`, low: `<span class=wb>${t('Low')}</span>`, ok: `<span class=ok>${t('OK')}</span>` }[lvl(p)],
+      pl = window._pl || '',
+      pf = p => !pl || (pl == 'arch' ? p.arch : !p.arch && lvl(p) == pl),
+      nm = p => e(p.name) + (p.arch ? ` <span class=mu>(${t('Archived')})</span>` : ''),
+      acts = (p, main) => `<button onclick="edit('${p.id}')">${t('Edit')}</button> ${main} <button onclick="hist('${p.id}')">${t('History')}</button> <button onclick="arch('${p.id}')">${t(p.arch ? 'Unarchive' : 'Archive')}</button> <button class=x onclick="del('${p.id}')">${t('Delete')}</button>`,
+      list = fin => srch(
+        db.prods.filter(p => (p.cat == 'Finished Product') == fin && pf(p)).sort((a, b) => rk(a) - rk(b) || a.name.localeCompare(b.name)).map(p => fin ? {
+          k: p.arch || lvl(p) == 'ok' ? '' : lvl(p),
+          c: [nm(p), e(p.sku), e(t(p.unit)), p.stock, p.min, p.pp ? money(p.pp) : '-', p.pp ? money(p.stock * p.pp) : '-', bdg(p),
+            acts(p, !p.arch ? `<button class=p onclick="stockForm('${p.id}')">${t('Batch In')}</button>` : '')]
+        } : {
+          k: p.arch || lvl(p) == 'ok' ? '' : lvl(p),
+          c: [nm(p), e(p.sku), e(t(p.unit)), p.stock, p.min, p.pp ? money(p.pp) : '-', p.pp ? money(p.stock * p.pp) : '-', bdg(p),
+            acts(p, !p.arch && lvl(p) != 'ok' ? `<button class=p onclick="adjForm('${p.id}','1','Purchase Received')">${t('Restock')}</button>` : '')]
+        }),
+        1
+      );
+    return B('Products',
+      btn('adjForm()', 'Adjust Stock', 'p') + `<select onchange="_pl=this.value;go('prod')"><option value="">${t('All Status')}</option>${[['out', 'Out'], ['low', 'Low'], ['ok', 'OK'], ['arch', 'Archived']].map(o => `<option value="${o[0]}" ${pl == o[0] ? 'selected' : ''}>${t(o[1])}</option>`).join('')}</select>`) +
+      `<div class=g style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">${kp('Inventory Value', money(sv), '', nop ? `${nop} ${t('without price')}` : '')}${kp('Low Stock Items', low.length, low.length ? 'bad' : '')}${kp('Out of Stock', out.length, out.length ? 'bad' : '')}</div>` +
+      B('Goods', btn(`edit(null,'Finished Product')`, 'Add Goods', 'p')) +
+      tbl(['Name', 'SKU', 'Unit', 'Stock', 'Minimum Stock', 'Unit Price', 'Stock Value', 'Status', 'Actions'], list(true), 1) +
+      `<div style="height:16px"></div>` +
+      B('Raw Materials', btn(`edit(null,'Raw Material')`, 'Add Raw Material', 'p')) +
+      tbl(['Name', 'SKU', 'Unit', 'Stock', 'Minimum Stock', 'Unit Price', 'Stock Value', 'Status', 'Actions'], list(false), 1);
+  },
+  usr() {
+    if (!isAdmin(ses)) return `<div class=es>${t('Admin only')}</div>`;
+    return B('Users', btn('addUser()', 'Add', 'p')) +
+      tbl(['Username', 'Role', 'Actions'], Object.keys(users).map(u => [e(u), t(isAdmin(u) ? 'Admin' : 'Staff'), `<button onclick="changePw('${e(u)}')">${t('Change Password')}</button> ` + (u == ses ? '' : `<button class=x onclick="delUser('${e(u)}')">${t('Delete')}</button>`)]));
+  },
+  stock() {
+    const sf = window._sf || '',
+      tf = window._tf || '',
+      rs = revSet(),
+      mvs = db.moves.filter(x => inR(x.d) && (!sf || x.sh == sf) && (!tf || x.type == tf)),
+      live = ty => fmtU(sumU(mvs.filter(x => !rs.has(x.id)), ty)),
+      rows = srch(
+        mvs.slice().reverse().map(x => ({
+          c: [
+            x.d,
+            e(x.tm || '-'),
+            e(shName(x.sh)),
+            e(P(x.pid).name),
+            tl(x.type),
+            t(x.reason || ''),
+            qtyTxt(x),
+            remTxt(x),
+            rs.has(x.id) ? `<span class=mu>${t('Reversed')}</span>` : x.refId == null && REVERSIBLE.includes(x.type) ? `<button onclick="revMove('${x.id}')">${t('Reverse')}</button>` : ''
+          ]
+        })),
+        1
+      );
+    return B(
+      'Stock',
+      `<select onchange="_tf=this.value;page=0;go('stock')"><option value="">${t('All Types')}</option>${['in', 'out', 'adj', 'rev'].map(k => `<option value="${k}" ${tf == k ? 'selected' : ''}>${tl(k)}</option>`).join('')}</select><select onchange="_sf=this.value;page=0;go('stock')"><option value="">${t('All Batches')}</option>${['1','2','3'].map(s=>`<option value="${s}" ${sf==s?'selected':''}>${e(shName(s))}</option>`).join('')}</select>${btn('stockForm()', 'Batch In', 'p')}${btn('rmForm()', 'Raw Material Used', 'p')}${btn('adjForm()', 'Adjust Stock')}`
+    ) +
+      rangeBar() +
+      tbl(['Date', 'Time', 'Batch', 'Name', 'Type', 'Reason', 'Quantity', 'Remarks', 'Actions'], rows);
+  }
+};
+
+let tpc = 'Raw Material';
+function go(v) {
+  document.documentElement.lang = lang;
+  if (v != view) page = 0;
+  view = v;
+  $('#nv').innerHTML = `<h1>${t('Rangoli ERP')}</h1>` +
+    NAV.filter(n => n[0] != 'usr' || isAdmin(ses)).map(n => `<a class="${n[0]==v?'on':''}" tabindex=0 onclick="go('${n[0]}')">${t(n[1])}</a>`).join('') + `<a tabindex=0 onclick=logout()>${t('Logout')} (${e(ses)})</a>`;
+  $('#bc').textContent = t('Rangoli ERP') + ' / ' + t(NAV.find(n => n[0] == v)[1]);
+  $('#q').placeholder = t('Search');
+  document.title = t('Rangoli ERP');
+  $('#lg').value = lang;
+  $('#th').textContent = document.documentElement.dataset.theme == 'dark' ? t('Light') : t('Dark');
+  try {
+    $('#v').innerHTML = V[v]();
+  } catch (x) {
+    $('#v').innerHTML = '<div class=es>' + t('Error') + ': ' + e(x.message) + '</div>';
+  }
+}
+
+function theme(d) {
+  document.documentElement.dataset.theme = d;
+  S.s('thm', d);
+}
+
+{
+  const s = S.g('thm') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+  theme(s);
+}
+$('#th').onclick = () => {
+  theme(document.documentElement.dataset.theme == 'dark' ? 'light' : 'dark');
+  go(view);
+  toast('Theme Changed');
+};
+$('#lg').value = lang;
+$('#lg').onchange = ev => {
+  lang = ev.target.value;
+  S.s('lg', lang);
+  go(view);
+  toast('Language Changed');
+};
+$('#q').oninput = () => {
+  page = 0;
+  go(view);
+};
+document.addEventListener('keydown', ev => {
+  if (ev.key == 'Escape') cl();
+  if (/INPUT|SELECT|TEXTAREA/.test(ev.target.tagName) || ev.ctrlKey || ev.metaKey) return;
+  const k = ev.key.toLowerCase();
+  if (k == 'p') {
+    ev.preventDefault();
+    edit();
+  } else if (k == 's') {
+    ev.preventDefault();
+    stockForm();
+  } else if (k == '/') {
+    ev.preventDefault();
+    $('#q').focus();
+  }
+});
+
+// ---- Config ----
+const CFG = {
+  notifyUrl: '', // e.g. 'http://localhost:3000/api/notify' (server/notify-server.js)
+  googleClientId: '', // set to enable Gmail login
+  gmailAllow: [] // allowed Gmail addresses; empty = any
+};
+
+// ---- Auth (client-side only) ----
+let users = {},
+  ses = ''; // session lives only in memory: refresh or closing the tab asks for login again
+try {
+  users = JSON.parse(S.g('us') || '{}');
+} catch (x) {}
+const hash = async (u, p) => {
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(u + ':' + p));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+};
+const saveUsers = () => S.s('us', JSON.stringify(users));
+// Roles: 'admin' can add/delete users and change passwords; 'worker' (shown as Staff) cannot open the Users page.
+let roles = {};
+try {
+  roles = JSON.parse(S.g('ur') || '{}');
+} catch (x) {}
+const saveRoles = () => S.s('ur', JSON.stringify(roles)),
+  isAdmin = u => roles[u] == 'admin',
+  adminCount = () => Object.keys(users).filter(isAdmin).length;
+// Older data had one admin stored under 'adm': keep that account as admin, everyone else is a worker.
+if (S.g('adm') && users[S.g('adm')] && !roles[S.g('adm')]) {
+  roles[S.g('adm')] = 'admin';
+  saveRoles();
+}
+
+function addUser() {
+  if (!isAdmin(ses)) return;
+  form('Add', [['u', 'Username', '', 0, 1], ['p', 'Password', 'password', 0, 1], ['r', 'Role', 'sel', [['worker', t('Staff')], ['admin', t('Admin')]]]], { r: 'worker' }, o => {
+    const u = o.u.trim().toLowerCase();
+    if (!/^[a-z0-9._@-]+$/.test(u) || o.p.length < 4 || users[u]) {
+      toast('Invalid number');
+      return false;
+    }
+    hash(u, o.p).then(h => {
+      users[u] = h;
+      roles[u] = o.r == 'admin' ? 'admin' : 'worker';
+      saveUsers();
+      saveRoles();
+      go('usr');
+    });
+  });
+}
+function changePw(u) {
+  if (!isAdmin(ses) || !users[u]) return;
+  form('Change Password', [['p', 'New Password', 'password', 0, 1]], {}, o => {
+    if (o.p.length < 4) {
+      toast('Invalid number');
+      return false;
+    }
+    hash(u, o.p).then(h => {
+      users[u] = h;
+      saveUsers();
+      toast('Password Changed');
+      go('usr');
+    });
+  });
+}
+function delUser(u) {
+  if (!isAdmin(ses) || !users[u]) return;
+  if (u == ses) {
+    toast('You cannot delete your own account');
+    return;
+  }
+  if (isAdmin(u) && adminCount() < 2) {
+    toast('At least one admin is required');
+    return;
+  }
+  ask(t('Delete this item?'), () => {
+    delete users[u];
+    delete roles[u];
+    saveUsers();
+    saveRoles();
+    go('usr');
+  });
+}
+function logout() {
+  ses = '';
+  loginView();
+}
+function start(u) {
+  ses = u;
+  cl();
+  go('dash');
+  try {
+    if (window.Notification && Notification.permission == 'default') Notification.requestPermission();
+  } catch (x) {}
+}
+function loginView() {
+  const first = !Object.keys(users).length,
+    eye = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+  $('#m').innerHTML = `<div class=lgn><div class=lgc><select id=ll aria-label="${e(t('Language'))}" style="float:right;background:#fff;color:#111827;border:1px solid #d1d5db;border-radius:8px;padding:4px 8px;font-size:13px"><option value=en>English</option><option value=hi>हिन्दी</option></select><h1>${t('Rangoli ERP')}</h1><label>${t('Username')}<input id=lu placeholder="${e(t('Username'))}" autocomplete=username></label><label>${t('Password')}<span class=lpw><input id=lp type=password placeholder="${e(t('Password'))}" autocomplete=current-password><button type=button id=le2 aria-label="${e(t('Show password'))}">${eye}</button></span></label><small class=lerr id=le></small><button class=lbt id=lb>${first ? t('Create Admin') : t('Sign In')}</button></div></div>`;
+  const go_ = async () => {
+    const u = $('#lu').value.trim().toLowerCase(),
+      p = $('#lp').value;
+    if (!u || p.length < 4 || !/^[a-z0-9._@-]+$/.test(u)) {
+      $('#le').textContent = t('Invalid username or password');
+      return;
+    }
+    const h = await hash(u, p);
+    if (first) {
+      users[u] = h;
+      saveUsers();
+      roles[u] = 'admin';
+      saveRoles();
+      S.s('adm', u);
+      start(u);
+    } else if (users[u] === h) start(u);
+    else $('#le').textContent = t('Invalid username or password');
+  };
+  $('#ll').value = lang;
+  $('#ll').onchange = ev => {
+    lang = ev.target.value;
+    S.s('lg', lang);
+    document.documentElement.lang = lang;
+    document.title = t('Rangoli ERP');
+    $('#lg').value = lang;
+    loginView();
+  };
+  $('#lb').onclick = go_;
+  $('#le2').onclick = () => {
+    const i = $('#lp');
+    i.type = i.type == 'password' ? 'text' : 'password';
+  };
+  [$('#lu'), $('#lp')].forEach(i => i.onkeydown = ev => {
+    if (ev.key == 'Enter') go_();
+  });
+  $('#lu').focus();
+}
+
+// ---- Low-stock notification at 5:00 PM and 1:00 AM (page must be open) ----
+function notifyLow() {
+  const l = db.prods.filter(p => !p.arch && isLow(p));
+  if (!l.length) return;
+  const text = t('Low stock') + ': ' + l.map(p => p.name + ' ' + p.stock + ' ' + t(p.unit)).join(', ');
+  toast(text);
+  try {
+    if (window.Notification && Notification.permission == 'granted') new Notification(t('Rangoli ERP'), { body: text });
+  } catch (x) {}
+  if (CFG.notifyUrl)
+    fetch(CFG.notifyUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, items: l.map(p => ({ name: p.name, stock: p.stock, unit: p.unit, min: p.min })) })
+    }).catch(() => {});
+}
+setInterval(() => {
+  const n = new Date(),
+    k = ymd(n) + pad(n.getHours());
+  if (ses && n.getMinutes() == 0 && (n.getHours() == 17 || n.getHours() == 1) && S.g('ln') != k) {
+    S.s('ln', k);
+    notifyLow();
+  }
+}, 20000);
+
+try {
+  localStorage.removeItem('se'); // clear any session saved by older versions
+} catch (x) {}
+document.documentElement.lang = lang;
+document.title = t('Rangoli ERP');
+loginView();
+
+
+</script>
+  </body>
+</html>
